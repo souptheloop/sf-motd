@@ -25,7 +25,7 @@ pub fn render_motd(fleets: &Vec<Fleet>) -> String {
         .map(|(_, fleet)| render_fleet(fleet))
         .collect();
 
-    return fleet_strings.join(" ");
+    return fleet_strings.join("<br/>");
 }
 
 fn render_fleet(fleet: &Fleet) -> String {
