@@ -4,9 +4,6 @@ mod models;
 
 #[macro_use] extern crate rocket;
 
-use std::fmt::format;
-use crate::models::fleet::Fleet;
-use crate::repository::fleets_html::ParseError;
 
 
 #[get("/")]

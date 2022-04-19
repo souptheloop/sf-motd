@@ -9,6 +9,7 @@ impl Colors {
     const NS: &'static str = "#ffff0000";
     const COVOPS: &'static str = "#ffb2b2b2";
     const EVENT: &'static str = "#ff00ffff";
+    const TRAINING: &'static str = "#ffff00ff";
 }
 
 const NUM_FLEETS: usize = 3;
@@ -28,6 +29,7 @@ pub fn render_motd(fleets: &Vec<Fleet>) -> String {
     return fleet_strings.join("<br/>");
 }
 
+
 fn render_fleet(fleet: &Fleet) -> String {
     let time = fleet.start.format("%d/%m %H:%M");
     let color = match fleet.fleet_type {
@@ -36,6 +38,7 @@ fn render_fleet(fleet: &Fleet) -> String {
         FleetType::NS => Colors::NS,
         FleetType::COVOPS => Colors:: COVOPS,
         FleetType::EVENT => Colors::EVENT,
+        FleetType::TRAINING => Colors::TRAINING,
     };
     return format_fleet(color, time, fleet.url.as_str(), fleet.name.as_str(), fleet.fc.as_str(), fleet.formup.as_str());
 }
