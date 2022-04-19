@@ -8,8 +8,8 @@ mod models;
 
 #[get("/")]
 async fn index() -> String {
-    let eventsResult = repository::fleets_html::get_fleets("https://www.spectre-fleet.space".to_string()).await;
-    let events = match eventsResult {
+    let events_result = repository::fleets_html::get_fleets("https://www.spectre-fleet.space".to_string()).await;
+    let events = match events_result {
         Ok(events) => events,
         Err(e) => return format!("Error: {}", e)
     };

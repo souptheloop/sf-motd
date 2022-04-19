@@ -46,8 +46,11 @@ fn row_to_fleet(row: ElementRef) -> Fleet {
     let data = row.select(&td_selector).collect::<Vec<ElementRef>>();
 
     let anchor_selector = scraper::Selector::parse("a").unwrap();
+
+    let fleet = data[3].select(&anchor_selector).next().unwrap();
+    let fleet_name = fleet.inner_html().trim().to_string();
+
     let doctrine = data[4].select(&anchor_selector).next().unwrap();
-    let doctrine_name = doctrine.inner_html().trim().to_string();
     let doctrine_url = doctrine.value().attr("href").unwrap();
 
     let date = Utc.datetime_from_str(&data[6].inner_html(), "%B %d, %Y %H:%M").unwrap();
@@ -66,7 +69,7 @@ fn row_to_fleet(row: ElementRef) -> Fleet {
     };
 
     Fleet {
-        name: doctrine_name,
+        name: fleet_name,
         fc: data[2].inner_html(),
         formup: data[5].inner_html(),
         url: format!("https://www.spectre-fleet.space{}", doctrine_url),
@@ -103,13 +106,13 @@ mod tests {
         let result = repository::fleets_html::get_fleets(server_loc).await;
         let fleets = result.unwrap();
 
-        assert_eq!(fleets[0].name, "BVL Flying Circus - Panzerliede!");
+        assert_eq!(fleets[0].name, "BVL Flying Circus");
         assert_eq!(fleets[0].fc, "Larkness");
         assert_eq!(fleets[0].url, "https://www.spectre-fleet.space/d/PQ7w");
         assert_eq!(fleets[0].start, Utc.datetime_from_str("2022-04-18 12:00:00.000000", "%F %H:%M:%S.%f").unwrap());
         assert_eq!(fleets[0].fleet_type, FleetType::LS);
 
-        assert_eq!(fleets[1].name, "Golden Hunters");
+        assert_eq!(fleets[1].name, "Not a gate camp");
         assert_eq!(fleets[1].fc, "Arwen Estalia");
         assert_eq!(fleets[1].url, "https://www.spectre-fleet.space/d/AYIyg");
         assert_eq!(fleets[1].start, Utc.datetime_from_str("2022-04-18 18:00:00.000000", "%F %H:%M:%S.%f").unwrap());
