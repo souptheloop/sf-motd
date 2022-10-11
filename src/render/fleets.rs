@@ -10,7 +10,7 @@ impl Colors {
     const NS: &'static str = "#ffff0000";
     const COVOPS: &'static str = "#ffb2b2b2";
     const EVENT: &'static str = "#ff00ffff";
-    const GATECAMP: &'static str = "#ff00ffff";
+    const GATECAMP: &'static str = "#ffff00ff";
     const TRAINING: &'static str = "#ffff00ff";
 }
 
