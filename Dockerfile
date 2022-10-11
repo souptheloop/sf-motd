@@ -1,12 +1,12 @@
-FROM rust:1.60 as builder
-RUN rustup default nightly
+FROM rust:1.64 as builder
+
 WORKDIR /usr/src/sf-motd
 COPY src ./src
 COPY Cargo.toml Cargo.lock ./
 
 RUN cargo build
 
-FROM rust:1.60-slim
+FROM rust:1.64-slim
 
 COPY --from=builder /usr/src/sf-motd/target/debug/sf_motd /usr/local/bin/
 
