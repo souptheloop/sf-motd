@@ -65,6 +65,7 @@ fn row_to_fleet(row: ElementRef) -> Fleet {
         "dot-VNt" => FleetType::EVENT,
         "dot-CV" => FleetType::COVOPS,
         "dot-TR" => FleetType::TRAINING,
+        "dot-GC" => FleetType::GATECAMP,
         _ => FleetType::EVENT,
     };
 

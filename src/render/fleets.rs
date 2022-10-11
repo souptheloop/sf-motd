@@ -10,6 +10,7 @@ impl Colors {
     const NS: &'static str = "#ffff0000";
     const COVOPS: &'static str = "#ffb2b2b2";
     const EVENT: &'static str = "#ff00ffff";
+    const GATECAMP: &'static str = "#ff00ffff";
     const TRAINING: &'static str = "#ffff00ff";
 }
 
@@ -38,6 +39,7 @@ fn render_fleet(fleet: &Fleet) -> String {
         FleetType::NS => Colors::NS,
         FleetType::COVOPS => Colors::COVOPS,
         FleetType::EVENT => Colors::EVENT,
+        FleetType::GATECAMP => Colors::GATECAMP,
         FleetType::TRAINING => Colors::TRAINING,
     };
     let fc = match fleet.fc.as_str() {

@@ -7,6 +7,7 @@ pub enum FleetType {
     NS,
     COVOPS,
     TRAINING,
+    GATECAMP,
     EVENT,
 }
 
