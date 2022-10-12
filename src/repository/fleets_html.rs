@@ -47,16 +47,16 @@ fn row_to_fleet(row: ElementRef) -> Fleet {
 
     let anchor_selector = scraper::Selector::parse("a").unwrap();
 
-    let fleet = data[3].select(&anchor_selector).next().unwrap();
+    let fleet = data[2].select(&anchor_selector).next().unwrap();
     let fleet_name = fleet.inner_html().trim().to_string();
 
-    let doctrine = data[4].select(&anchor_selector).next().unwrap();
+    let doctrine = data[3].select(&anchor_selector).next().unwrap();
     let doctrine_url = doctrine.value().attr("href").unwrap();
 
-    let date = Utc.datetime_from_str(&data[6].inner_html(), "%B %d, %Y %H:%M").unwrap();
+    let date = Utc.datetime_from_str(&data[5].inner_html(), "%B %d, %Y %H:%M").unwrap();
 
     let span_selector = scraper::Selector::parse("span").unwrap();
-    let fleet_type_class = data[7].select(&span_selector).next().unwrap().value().attr("class").unwrap();
+    let fleet_type_class = data[6].select(&span_selector).next().unwrap().value().attr("class").unwrap();
 
     let fleet_type: FleetType = match fleet_type_class {
         "dot-HS" => FleetType::HS,
@@ -71,8 +71,8 @@ fn row_to_fleet(row: ElementRef) -> Fleet {
 
     Fleet {
         name: fleet_name,
-        fc: data[2].inner_html(),
-        formup: data[5].inner_html(),
+        fc: data[1].inner_html(),
+        formup: data[4].inner_html(),
         url: format!("https://www.spectre-fleet.space{}", doctrine_url),
         start: date,
         fleet_type,
